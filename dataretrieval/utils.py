@@ -8,23 +8,28 @@ from pandas.core.indexes.datetimes import DatetimeIndex
 
 from dataretrieval.codes import tz
 
+
 def to_str(listlike, delimiter=','):
     """Translates list-like objects into strings.
 
     Return:
         List-like object as string
     """
-    if type(listlike) == list:
-        return delimiter.join([str(x) for x in listlike])
+    # try to do conversion of listlike object to string
+    if isinstance(listlike, list):
+        listlike = delimiter.join([str(x) for x in listlike])
 
-    elif type(listlike) == pd.core.series.Series:
-        return delimiter.join(listlike.tolist())
+    if isinstance(listlike, pd.core.series.Series):
+        listlike = delimiter.join(listlike.tolist())
 
-    elif type(listlike) == pd.core.indexes.base.Index:
-        return delimiter.join(listlike.tolist())
+    if isinstance(listlike, pd.core.indexes.base.Index):
+        listlike = delimiter.join(listlike.tolist())
 
-    elif type(listlike) == str:
+    # if the listlike object is a string, return it, otherwise raise error
+    if isinstance(listlike, str):
         return listlike
+    raise TypeError(f'Cannot convert {type(listlike)} to string')
+
 
 def format_datetime(df, date_field, time_field, tz_field):
     """Creates a datetime field from separate date, time, and
@@ -122,12 +127,12 @@ def query(url, payload, delimiter=','):
     """Send a query.
 
     Wrapper for requests.get that handles errors, converts listed
-    query paramaters to comma separated strings, and returns response.
+    query parameters to comma separated strings, and returns response.
 
     Args:
         url :
         payload : query parameters passed to requests.get
-        delimiter : delimeter to use with lists
+        delimiter : delimiter to use with lists
 
     Returns:
         string : query response
