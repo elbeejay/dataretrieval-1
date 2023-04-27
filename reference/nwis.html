@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dataretrieval.nwis &mdash; dataretrieval 0.1.dev1+g5a45c76 documentation</title>
+  <title>dataretrieval.nwis &mdash; dataretrieval 0.1.dev1+g7326dfd documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -581,6 +581,7 @@ returned.</p>
 <li><p>’pmcodes’: get parameter codes</p></li>
 <li><p>’water_use’: get water use data</p></li>
 <li><p>’ratings’: get rating table</p></li>
+<li><p>’stat’: get statistics</p></li>
 </ul>
 </p></li>
 <li><p><strong>**kwargs</strong> (<em>optional</em>) – If supplied, will be used as query parameters</p></li>
@@ -628,6 +629,11 @@ returned.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get rating table for USGS streamgage 01585200</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">dataretrieval</span><span class="o">.</span><span class="n">nwis</span><span class="o">.</span><span class="n">get_record</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">sites</span><span class="o">=</span><span class="s1">&#39;01585200&#39;</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="s1">&#39;ratings&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get annual statistics for USGS station 01646500</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">dataretrieval</span><span class="o">.</span><span class="n">nwis</span><span class="o">.</span><span class="n">get_record</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">sites</span><span class="o">=</span><span class="s1">&#39;01646500&#39;</span><span class="p">,</span> <span class="n">service</span><span class="o">=</span><span class="s1">&#39;stat&#39;</span><span class="p">,</span> <span class="n">statReportType</span><span class="o">=</span><span class="s1">&#39;annual&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">statYearType</span><span class="o">=</span><span class="s1">&#39;water&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
